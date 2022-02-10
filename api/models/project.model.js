@@ -6,9 +6,20 @@ module.exports = (sequelize, DataTypes) => {
         },
         leadId: {
             type: DataTypes.INTEGER,
-            allowNull: true
+            references: {
+                model: "users",
+                key: "id"
+            },
+            allowNull: false,
         }
-    }, { underscored: true, timestamps: false})
+    }, { underscored: true, timestamps: false});
+
+    Project.associate = (models) => {
+        models.Project.belongsTo(models.User, {
+            foreignKey: "userId",
+            as: "user"
+        });
+    }
 
     return Project;
 }

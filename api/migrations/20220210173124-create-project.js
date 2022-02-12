@@ -15,10 +15,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      lead_id: {
-        type: Sequelize.INTEGER,
-        allowNull: true
-      }
     });
   }),
 

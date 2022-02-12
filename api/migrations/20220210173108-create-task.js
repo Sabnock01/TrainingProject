@@ -1,21 +1,32 @@
 'use strict';
 
-module.exports = {
-  async up (queryInterface, Sequelize) {
-    /**
-     * Add altering commands here.
-     *
-     * Example:
-     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
-     */
-  },
+const tableName = "tasks"
 
-  async down (queryInterface, Sequelize) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
-  }
+module.exports = {
+  up: async (queryInterface, Sequelize)  => queryInterface.sequelize.transaction (async (t) => {
+    await queryInterface.createTable(tableName, {
+      id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+        allowNull: false
+      },
+      summary: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      description: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      status: {
+        type: Sequelize.STRING,
+        allowNull: false
+      }
+    });
+  }),
+
+  down: async (queryInterface, Sequelize) => queryInterface.sequelize.transaction (async (t) => {
+    await queryInterface.dropTable(tableName, { transaction: t });
+  }),
 };

@@ -10,6 +10,22 @@ module.exports = {
             return res.sendStatus(500);
         }
     },
+    getAllForUser: async (req, res) => {
+        try {
+            console.log(req.params);
+        } catch (e) {
+            console.log(e);
+            return res.sendStatus(500);
+        }
+    },
+    getAllForProject: async (req, res) => {
+        try {
+            console.log(req.params);
+        } catch (e) {
+            console.log(e);
+            return res.sendStatus(500);
+        }
+    },
     create: async (req, res) => {
         try {
             const task = await Task.create({...req.body});

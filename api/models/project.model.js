@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Project.associate = (models) => {
         models.Project.belongsTo(models.User, {
-            foreignKey: "id",
+            foreignKey: "userId",
             as: "users"
         });
     }

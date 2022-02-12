@@ -35,10 +35,8 @@ module.exports = (sequelize, DataTypes) => {
     })
 
     User.associate = (models) => {
-        models.User.hasMany(models.Project, {
-            foreignKey: "lead_id",
-            as: "projects"
-        });
+        models.User.hasMany(models.Project);
+        models.User.hasMany(models.Task);
     };
 
     User.prototype.hashPassword = async function hashPassword() {

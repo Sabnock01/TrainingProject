@@ -18,6 +18,9 @@ module.exports = {
                     user_id: userId
                 }
             })
+            if (tasks.length === 0) {
+                return res.status(404).send({ error: `No tasks for User Id ${userId} found!` });
+            }
             return res.send(tasks);
         } catch (e) {
             console.log(e);
@@ -32,6 +35,9 @@ module.exports = {
                     project_id: projectId
                 }
             })
+            if (tasks.length === 0) {
+                return res.status(404).send({ error: `No tasks for Project Id ${projectId} found!` });
+            }
             return res.send(tasks);
         } catch (e) {
             console.log(e);

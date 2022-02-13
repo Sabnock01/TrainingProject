@@ -18,6 +18,9 @@ module.exports = {
                     lead_id: userId
                 }
             })
+            if (projects.length === 0) {
+                return res.status(404).send({ error: `No projects for User Id ${userId} found!` });
+            }
             return res.send(projects);
         } catch (e) {
             console.log(e);

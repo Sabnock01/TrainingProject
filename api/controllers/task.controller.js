@@ -12,7 +12,13 @@ module.exports = {
     },
     getAllForUser: async (req, res) => {
         try {
-            console.log(req.params);
+            const { userId } = req.params;
+            const tasks = await Task.findAll({
+                where: {
+                    user_id: userId
+                }
+            })
+            return res.send(tasks);
         } catch (e) {
             console.log(e);
             return res.sendStatus(500);
@@ -20,7 +26,13 @@ module.exports = {
     },
     getAllForProject: async (req, res) => {
         try {
-            console.log(req.params);
+            const { projectId } = req.params;
+            const tasks = await Task.findAll({
+                where: {
+                    project_id: projectId
+                }
+            })
+            return res.send(tasks);
         } catch (e) {
             console.log(e);
             return res.sendStatus(500);

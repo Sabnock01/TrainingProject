@@ -12,7 +12,13 @@ module.exports = {
     },
     getAllForUser: async (req, res) => {
         try {
-            console.log(req.params);
+            const { userId } = req.params;
+            const projects = await Project.findAll({
+                where: {
+                    lead_id: userId
+                }
+            })
+            return res.send(projects);
         } catch (e) {
             console.log(e);
             return res.sendStatus(500);

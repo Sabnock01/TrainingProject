@@ -32,8 +32,15 @@ module.exports = (sequelize, DataTypes) => {
     }, { underscored: true, timestamps: false});
 
     Task.associate = (models) => {
-        models.Task.belongsTo(models.Project);
-        models.Task.belongsTo(models.User);
+        // needed to add these two objects to prevent duplicate properties: userId and UserId, projectId and ProjectId
+        models.Task.belongsTo(models.Project, {
+            foreignKey: "id",
+            as: "projects"
+        });
+        models.Task.belongsTo(models.User, {
+            foreignKey: "id",
+            as: "users"
+        });
     }
 
     return Task;

@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: "id",
             as: "users"
         });
+        // why do you not need a has many for projects? or if you do how would that work? get duplicate alias error
     }
 
     return Project;

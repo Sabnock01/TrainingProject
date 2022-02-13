@@ -9,11 +9,24 @@
         </div>
       </div>
     </div>
+    <UsersTable/>
+    <ProjectsTable/>
+    <TasksTable/>
   </div>
 </template>
 
-<script>  
+<script>
+  import UsersTable from './UsersTable';
+  import ProjectsTable from './ProjectsTable';
+  import TasksTable from './TasksTable';
+
   export default {
-    name: 'HelloWorld',
+    name: 'Nav',
+    components: {
+      UsersTable,
+      ProjectsTable,
+      TasksTable,
+    },
+
   }
 </script>

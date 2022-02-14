@@ -8,4 +8,4 @@ RUN npm install
 
 ADD . .
 
-CMD [ "node", "index.js" ]
+CMD [ "npm", "run", "serve" ]

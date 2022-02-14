@@ -4,7 +4,7 @@
 
 <script>
 
-    export default {
-        name: 'TasksTable'
-    }
+  export default {
+    name: 'TasksTable',
+  }
 </script>

@@ -1,10 +1,10 @@
 <template>
-    <div></div>
+  <div></div>
 </template>
 
 <script>
 
-    export default {
-        name: 'UsersTable',
-    }
+  export default {
+      name: 'UsersTable',
+  }
 </script>

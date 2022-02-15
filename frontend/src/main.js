@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App.vue'
 import vuetify from './plugins/vuetify'
+// Don't think this is being used?
+import 'vuetify/dist/vuetify.min.css';
 import './index.css'
 
 import Login from './components/Login';

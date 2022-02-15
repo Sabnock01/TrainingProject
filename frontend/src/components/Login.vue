@@ -6,19 +6,19 @@
               <v-flex xs12 sm8 md4>
                 <v-card class="elevation-12">
                     <v-toolbar dark color="primary">
-                      <v-toolbar-title>Login form</v-toolbar-title>
+                      <v-toolbar-title>Login</v-toolbar-title>
                     </v-toolbar>
                     <v-card-text>
                       <v-form>
                           <v-text-field
-                            prepend-icon="person"
+                            prepend-icon="mdi-account"
                             name="login"
                             label="Login"
                             type="text"
                           ></v-text-field>
                           <v-text-field
                             id="password"
-                            prepend-icon="lock"
+                            prepend-icon="mdi-lock"
                             name="password"
                             label="Password"
                             type="password"

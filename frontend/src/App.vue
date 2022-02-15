@@ -1,30 +1,70 @@
 <template>
-  <!-- <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-    </v-app-bar> -->
-
-    <!-- <v-main> -->
-      <Nav/>
-    <!-- </v-main>
-  </v-app> -->
+   <v-app id="app">
+      <template v-if="!$route.path.includes('login')">
+         <v-navigation-drawer v-model="drawer" fixed app>
+            <v-toolbar flat dark color="success">
+               <v-list>
+                  <v-list-item>
+                     <v-list-item-title class="title">
+                        Simply Clinical Software
+                     </v-list-item-title>
+                  </v-list-item>
+               </v-list>
+            </v-toolbar>
+            <v-list dense>
+               <v-list-item @click="drawer = false;" to="/login">
+                  <v-list-item-action>
+                     <v-icon>home</v-icon>
+                  </v-list-item-action>
+                  <v-list-item-content>
+                     <v-list-item-title>Login</v-list-item-title>
+                  </v-list-item-content>
+               </v-list-item>
+               <v-list-item @click="drawer = false;">
+                  <v-list-item-action>
+                     <v-icon>contact_mail</v-icon>
+                  </v-list-item-action>
+                  <v-list-item-content>
+                     <v-list-item-title>Contact</v-list-item-title>
+                  </v-list-item-content>
+               </v-list-item>
+            </v-list>
+         </v-navigation-drawer>
+         <v-app-bar color="primary" dark fixed app>
+            <v-app-bar-nav-icon
+               @click.stop="drawer = !drawer;"
+            ></v-app-bar-nav-icon>
+            <v-toolbar-title>Application</v-toolbar-title>
+         </v-app-bar>
+      </template>
+      <v-main>
+         <keep-alive :include="['Login']">
+            <router-view></router-view>
+         </keep-alive>
+      </v-main>
+   </v-app>
 </template>
 
 <script>
-  import Nav from './components/Nav';
-
-  export default {
-    name: 'App',
-
-    components: {
-      Nav,
-    },
-
-    data: () => ({
-      //
-    }),
-  };
+export default {
+   data: () => ({
+      drawer: false,
+   }),
+   props: {
+      source: String,
+   },
+};
 </script>
+
+<script>
+export default {
+   name: 'App',
+   data() {
+      return {
+         drawer: false,
+      };
+   },
+};
+</script>
+
+<style></style>

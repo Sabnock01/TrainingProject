@@ -2,15 +2,6 @@
    <v-app id="app">
       <template v-if="!$route.path.includes('login')">
          <v-navigation-drawer v-model="drawer" fixed app>
-            <!-- <v-toolbar flat dark color="primary">
-               <v-list>
-                  <v-list-item>
-                     <v-list-item-title class="title">
-                        Simply Clinical Software
-                     </v-list-item-title>
-                  </v-list-item>
-               </v-list>
-            </v-toolbar> -->
             <v-list dense color="primary">
                <v-list-item @click="drawer = false;" to="/login">
                   <v-list-item-action>

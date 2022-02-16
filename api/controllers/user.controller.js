@@ -1,6 +1,32 @@
+const bcrypt = require('bcryptjs');
+const jwt = require('../config/jwt');
 const { User } = require('../models');
+const { generateAccessToken } = require('../helpers/user.helper');
 
 module.exports = {
+    getNewAccessToken = (req, res) => {
+        const refreshToken = req.body.token;
+
+        if (refreshToken == null) {
+            res.sendStatus(401);
+        }
+
+        jwt.verify(refreshToken, "refresh_token", (err, user) => {
+            delete user.iat;
+            if (err) {
+                res.sendStatus(403);
+            }
+            const accessToken = generateAccessToken(user);
+
+            res.json({
+                accessToken,
+                time: this.time,
+            })
+        })
+    },
+    signIn = async (req, res) => {
+
+    },
     getAll: async (req, res) => {
         try {
             const users = await User.findAll();

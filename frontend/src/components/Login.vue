@@ -11,12 +11,14 @@
                     <v-card-text>
                       <v-form>
                           <v-text-field
+                            v-model="credentials.inputEmail"
                             prepend-icon="mdi-account"
                             name="email"
                             label="Email"
                             type="text"
                           ></v-text-field>
                           <v-text-field
+                            v-model="credentials.inputPassword"
                             id="password"
                             prepend-icon="mdi-lock"
                             name="password"
@@ -27,7 +29,7 @@
                     </v-card-text>
                     <v-card-actions>
                       <v-spacer></v-spacer>
-                      <v-btn color="primary" to="/">Login</v-btn>
+                      <v-btn color="primary" @click="signIn">Login</v-btn>
                     </v-card-actions>
                 </v-card>
               </v-flex>
@@ -38,8 +40,24 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: 'Login',
+  data() {
+    return {
+      credentials: {
+        inputEmail: null,
+        inputPassword: null,
+      }
+    }
+  },
+  methods: {
+    async signIn() {
+      await axios.post("http://52.54.203.146:8000/users/signIn", {...this.credentials})
+      .then((res) => res.data);
+    }
+  }
 };
 </script>
 

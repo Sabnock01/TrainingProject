@@ -26,8 +26,8 @@ module.exports = {
     },
     signIn: async (req, res) => {
         const {
-            email: inputEmail,
-            password: inputPassword,
+            inputEmail,
+            inputPassword,
         } = req.body;
 
         const user = await User.findOne({

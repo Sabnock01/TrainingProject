@@ -12,8 +12,8 @@
                       <v-form>
                           <v-text-field
                             prepend-icon="mdi-account"
-                            name="login"
-                            label="Login"
+                            name="email"
+                            label="Email"
                             type="text"
                           ></v-text-field>
                           <v-text-field

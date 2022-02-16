@@ -4,7 +4,7 @@ const { User } = require('../models');
 const { generateAccessToken } = require('../helpers/user.helper');
 
 module.exports = {
-    getNewAccessToken = (req, res) => {
+    getNewAccessToken: (req, res) => {
         const refreshToken = req.body.token;
 
         if (refreshToken == null) {
@@ -24,7 +24,7 @@ module.exports = {
             })
         })
     },
-    signIn = async (req, res) => {
+    signIn: async (req, res) => {
         const {
             email: inputEmail,
             password: inputPassword,

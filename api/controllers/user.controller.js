@@ -25,7 +25,35 @@ module.exports = {
         })
     },
     signIn = async (req, res) => {
+        const {
+            email: inputEmail,
+            password: inputPassword,
+        } = req.body;
 
+        const user = await User.findOne({
+            where: {
+                email: inputEmail
+            },
+        });
+
+        if (user) {
+            bcrypt.compare(
+                inputPassword,
+                user.password,
+                async (err, data) => {
+                    if (err) {
+                        throw err;
+                    }
+                    if (data) {
+                        return res.status(200).json(user);
+                    } else {
+                        return res.status(401).json({ message: "Invalid credentials" });
+                    }
+                }
+            )
+        } else {
+            return res.status(401).json({ message: "Invalid credentials" });
+        }
     },
     getAll: async (req, res) => {
         try {

@@ -3,6 +3,8 @@ const controller = require('../controllers/user.controller');
 
 const router = Router();
 
+router.post('/signIn', controller.signIn);
+router.post('/getNewToken', controller.getNewAccessToken);
 router.get('/', controller.getAll);
 router.get('/:id', controller.getById);
 router.post('/', controller.create);

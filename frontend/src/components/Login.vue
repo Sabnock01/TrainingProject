@@ -56,6 +56,8 @@ export default {
     async signIn() {
       await axios.post("http://localhost:8000/users/signIn", {...this.credentials})
       .then((res) => res.data);
+
+      await this.$router.push('/home')
     }
   }
 };

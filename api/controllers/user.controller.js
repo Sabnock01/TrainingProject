@@ -36,6 +36,8 @@ module.exports = {
             },
         });
 
+        console.log(user.password);
+
         if (user) {
             bcrypt.compare(
                 inputPassword,
@@ -47,12 +49,12 @@ module.exports = {
                     if (data) {
                         return res.status(200).json(user);
                     } else {
-                        return res.status(401).json({ message: "Invalid credentials" });
+                        return res.status(401).json({ message: "Password does not match." });
                     }
                 }
             )
         } else {
-            return res.status(401).json({ message: "Invalid credentials" });
+            return res.status(401).json({ message: "No user found." });
         }
     },
     getAll: async (req, res) => {

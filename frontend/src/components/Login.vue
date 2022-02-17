@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     async signIn() {
-      await axios.post("http://52.54.203.146:8000/users/signIn", {...this.credentials})
+      await axios.post("http://localhost:8000/users/signIn", {...this.credentials})
       .then((res) => res.data);
     }
   }

@@ -4,7 +4,7 @@
         <v-container fluid fill-height>
           <v-layout align-center justify-center>
               <v-flex xs12 sm8 md4>
-                <v-card class="elevation-12 mr-auto ml-auto">
+                <v-card class="elevation-12 mr-auto ml-auto" v-on:keyup.enter="signIn">
                     <v-toolbar dark color="primary">
                       <v-toolbar-title>Login</v-toolbar-title>
                     </v-toolbar>
@@ -15,7 +15,7 @@
                             prepend-icon="mdi-account"
                             name="email"
                             label="Email"
-                            type="text"
+                            type="email"
                           ></v-text-field>
                           <v-text-field
                             v-model="credentials.inputPassword"

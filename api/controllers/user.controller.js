@@ -28,15 +28,13 @@ module.exports = {
         const {
             inputEmail,
             inputPassword,
-        } = req.body;
+        } = req.body.body;
 
         const user = await User.findOne({
             where: {
                 email: inputEmail
             },
         });
-
-        console.log(user.password);
 
         if (user) {
             bcrypt.compare(

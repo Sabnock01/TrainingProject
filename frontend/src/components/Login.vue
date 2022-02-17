@@ -47,17 +47,25 @@ export default {
   data() {
     return {
       credentials: {
-        inputEmail: null,
-        inputPassword: null,
+        inputEmail: '',
+        inputPassword: '',
       }
     }
   },
   methods: {
     async signIn() {
-      await axios.post("http://localhost:8000/users/signIn", {...this.credentials})
+      await axios.post("http://localhost:8000/users/signIn", {
+        method: 'POST', 
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'include',
+        body: this.credentials
+      })
       .then((res) => res.data);
 
-      await this.$router.push('/home')
+      await this.$router.push('/home').catch(()=>{});
+
+      this.credentials.inputEmail = '';
+      this.credentials.inputPassword = '';
     }
   }
 };

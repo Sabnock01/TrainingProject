@@ -74,7 +74,7 @@ module.exports = {
     },
     update: async (req, res) => {
         try {
-            const { name, birthDate, deathDate, nationality } = req.body;
+            const { projectId, userId, summary, description, status } = req.body;
 
             const id = req.params.id;
             const task = await Task.findOne({
@@ -89,8 +89,8 @@ module.exports = {
 
             let updates = { ...req.body };
 
-            const currentTask = `${task.dataValues.name} ${task.dataValues.birthDate} ${task.dataValues.deathDate} ${task.dataValues.nationality}`;
-            const updatedTask = `${name} ${birthDate} ${deathDate} ${nationality}`;
+            const currentTask = `${task.dataValues.projectId} ${task.dataValues.userId} ${task.dataValues.summary} ${task.dataValues.description} ${task.dataValues.status}`;
+            const updatedTask = `${projectId} ${userId} ${summary} ${description} ${status}`;
 
             if (currentTask !== updatedTask) {
                 updates = {

@@ -57,7 +57,7 @@ module.exports = {
     },
     update: async (req, res) => {
         try {
-            const { name, birthDate, deathDate, nationality } = req.body;
+            const { name, leadId } = req.body;
 
             const id = req.params.id;
             const project = await Project.findOne({
@@ -72,8 +72,8 @@ module.exports = {
 
             let updates = { ...req.body };
 
-            const currentProject = `${project.dataValues.name} ${project.dataValues.birthDate} ${project.dataValues.deathDate} ${project.dataValues.nationality}`;
-            const updatedProject = `${name} ${birthDate} ${deathDate} ${nationality}`;
+            const currentProject = `${project.dataValues.name} ${project.dataValues.leadId}`;
+            const updatedProject = `${name} ${leadId}`;
 
             if (currentProject !== updatedProject) {
                 updates = {

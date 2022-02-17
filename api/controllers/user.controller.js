@@ -94,7 +94,7 @@ module.exports = {
     },
     update: async (req, res) => {
         try {
-            const { name, birthDate, deathDate, nationality } = req.body;
+            const { name, email } = req.body;
 
             const id = req.params.id;
             const user = await User.findOne({
@@ -109,8 +109,8 @@ module.exports = {
 
             let updates = { ...req.body };
 
-            const currentUser = `${user.dataValues.name} ${user.dataValues.birthDate} ${user.dataValues.deathDate} ${user.dataValues.nationality}`;
-            const updatedUser = `${name} ${birthDate} ${deathDate} ${nationality}`;
+            const currentUser = `${user.dataValues.name} ${user.dataValues.email}`;
+            const updatedUser = `${name} ${email}`;
 
             if (currentUser !== updatedUser) {
                 updates = {

@@ -1,29 +1,9 @@
 const bcrypt = require('bcryptjs');
-const jwt = require('../config/jwt');
+const jwt = require("jsonwebtoken");
 const { User } = require('../models');
 const { generateAccessToken } = require('../helpers/user.helper');
 
 module.exports = {
-    getNewAccessToken: (req, res) => {
-        const refreshToken = req.body.token;
-
-        if (refreshToken == null) {
-            res.sendStatus(401);
-        }
-
-        jwt.verify(refreshToken, "refresh_token", (err, user) => {
-            delete user.iat;
-            if (err) {
-                res.sendStatus(403);
-            }
-            const accessToken = generateAccessToken(user);
-
-            res.json({
-                accessToken,
-                time: this.time,
-            })
-        })
-    },
     signIn: async (req, res) => {
         const {
             inputEmail,
@@ -45,7 +25,8 @@ module.exports = {
                         throw err;
                     }
                     if (data) {
-                        return res.status(200).json(user);
+                        const token = jwt.sign(user, process.env.JWT_KEY);
+                        return res.status(200).json({token, user});
                     } else {
                         return res.status(401).json({ message: "Password does not match." });
                     }

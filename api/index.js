@@ -1,10 +1,10 @@
 require("dotenv").config();
 
-const http = require('http');
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const router = require('./routers');
+const http = require("http");
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const router = require("./routers");
 
 const PORT = 8000;
 

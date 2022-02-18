@@ -1,9 +1,9 @@
-'use strict';
+
 
 const tableName = "projects";
 
 module.exports = {
-  up: async (queryInterface, Sequelize)  => queryInterface.sequelize.transaction (async (t) => {
+  up: async (queryInterface, Sequelize) => queryInterface.sequelize.transaction (async (t) => {
     await queryInterface.createTable(tableName, {
       id: {
         type: Sequelize.INTEGER,

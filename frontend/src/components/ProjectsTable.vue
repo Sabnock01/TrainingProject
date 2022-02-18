@@ -1,6 +1,10 @@
 <template>
   <div>
-    {{ this.projects }}  
+    <v-data-table
+      :headers="headers"
+      :items="projects"
+      class="elevation-4"
+    ></v-data-table>
   </div>
 </template>
 
@@ -11,7 +15,11 @@ import axios from 'axios';
     name: 'ProjectsTable',
     data() {
       return {
-        projects: []
+        projects: [],
+        headers: [
+          { text: "Name", value: "name" },
+          { text: "Lead Id", value: "leadId" }
+        ]
       }
     },
     async created() {

@@ -62,7 +62,7 @@ export default {
       })
       .then((res) => res.data);
 
-      await this.$router.push('/home').catch(()=>{});
+      await this.$router.push('/users-table').catch(()=>{});
 
       this.credentials.inputEmail = '';
       this.credentials.inputPassword = '';

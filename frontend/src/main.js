@@ -7,7 +7,6 @@ import 'vuetify/dist/vuetify.min.css';
 import './index.css'
 
 import Login from './components/Login';
-import Main from './components/Main';
 import UsersTable from './components/UsersTable';
 import ProjectsTable from './components/ProjectsTable.vue';
 import TasksTable from './components/TasksTable.vue';
@@ -18,10 +17,6 @@ const routes = [
   {
     path: '/login',
     component: Login,
-  },
-  {
-    path: '/home',
-    component: Main,
   },
   {
     path: '/users-table',

@@ -4,6 +4,71 @@
       <v-row>
         <v-col class="d-flex justify-end">
           <v-dialog
+            v-model="updateDialog"
+            width="500"
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                class="primary mx-1"
+                v-bind="attrs"
+                v-on="on"
+              >Update Project</v-btn>
+            </template>
+            <v-card>
+              <v-card-title class="text-h5 grey lighten-2">
+                Update Project
+              </v-card-title>
+              <v-card-text>
+                <v-container>
+                  <v-row>
+                    <v-col cols="12">
+                      <v-autocomplete
+                        v-model="idToUpdate"
+                        :items="projects"
+                        item-text="name"
+                        item-value="id"
+                        label="Project"
+                      ></v-autocomplete>
+                    </v-col>
+                    <v-col cols="12">
+                      <v-text-field
+                        v-model="project.name"
+                        label="Name"
+                        required
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12">
+                      <v-autocomplete
+                        v-model="project.leadId"
+                        :items="users"
+                        item-text="name"
+                        item-value="id"
+                        label="Project Lead*"
+                      ></v-autocomplete>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                  color="blue darken-1"
+                  text
+                  @click="updateDialog = false"
+                >
+                  Close
+                </v-btn>
+                <v-btn
+                  color="blue darken-1"
+                  text
+                  @click="updateProject"
+                >
+                  Save
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+          <v-dialog
             v-model="deleteDialog"
             width="500"
           >
@@ -72,14 +137,13 @@
                   <v-row>
                     <v-col cols="12">
                       <v-text-field
-                        v-model="createdProject.name"
+                        v-model="project.name"
                         label="Name"
-                        required
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12">
                       <v-autocomplete
-                        v-model="createdProject.leadId"
+                        v-model="project.leadId"
                         :items="users"
                         item-text="name"
                         item-value="id"
@@ -133,13 +197,15 @@ import axios from 'axios';
           { text: "Name", value: "name" },
           { text: "Lead Id", value: "leadId" }
         ],
-        createdProject: {
+        project: {
           name: '',
           leadId: null
         },
+        idToUpdate: null,
         idToDelete: null,
         dialog: false,
         deleteDialog: false,
+        updateDialog: false
       }
     },
     async created() {
@@ -157,7 +223,7 @@ import axios from 'axios';
         this.users = users;
       },
       async createProject() {
-        await axios.post("http://localhost:8000/projects", this.createdProject);
+        await axios.post("http://localhost:8000/projects", this.project);
 
         this.dialog = false;
       },
@@ -165,6 +231,11 @@ import axios from 'axios';
         await axios.delete(`http://localhost:8000/projects/${this.idToDelete}`);
 
         this.deleteDialog = false;
+      },
+      async updateProject() {
+        await axios.put(`http://localhost:8000/projects/${this.idToUpdate}`, this.project);
+
+        this.updateDialog = false;
       }
     }
   }

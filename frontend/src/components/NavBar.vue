@@ -1,7 +1,7 @@
 <template>
     <v-app id="app">
         <template v-if="!$route.path.includes('login')">
-            <v-navigation-drawer v-model="drawer" fixed app>
+            <v-navigation-drawer v-model="drawer" fixed app temporary>
                 <v-list dense color="primary">
                 <v-list-item @click="drawer = false;" to="/login">
                     <v-list-item-action>

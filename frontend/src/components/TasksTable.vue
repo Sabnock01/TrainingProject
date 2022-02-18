@@ -4,6 +4,55 @@
       <v-row>
         <v-col class="d-flex justify-end">
           <v-dialog
+            v-model="deleteDialog"
+            width="500"
+          >
+            <template v-slot:activator="{ on, attrs}">
+              <v-btn
+                class="primary mx-1"
+                v-bind="attrs"
+                v-on="on"
+              >Delete Task</v-btn>
+            </template>
+            <v-card>
+              <v-card-title class="text-h5 grey lighten-2">
+                Delete Task
+              </v-card-title>
+              <v-card-text>
+                <v-container>
+                  <v-row>
+                    <v-col cols="12">
+                      <v-autocomplete
+                        v-model="idToDelete"
+                        :items="tasks"
+                        item-text="summary"
+                        item-value="id"
+                        label="Task"
+                      ></v-autocomplete>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                  color="blue darken-1"
+                  text
+                  @click="deleteDialog = false"
+                >
+                  Close
+                </v-btn>
+                <v-btn
+                  color="blue darken-1"
+                  text
+                  @click="deleteTask"
+                >
+                  Save
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+          <v-dialog
             v-model="dialog"
             width="500"
           >
@@ -126,7 +175,9 @@ import axios from 'axios';
           description: '',
           status: '',
         },
-        dialog: false
+        idToDelete: null,
+        dialog: false,
+        deleteDialog: false
       }
     },
     async created() {
@@ -149,6 +200,11 @@ import axios from 'axios';
         await axios.post("http://localhost:8000/tasks", this.createdTask)
 
         this.dialog = false;
+      },
+      async deleteTask() {
+        await axios.delete(`http://localhost:8000/tasks/${this.idToDelete}`);
+
+        this.deleteDialog = false;
       }
     }
   }

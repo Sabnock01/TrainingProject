@@ -1,7 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 const { User } = require('../models');
-const { generateAccessToken } = require('../helpers/user.helper');
 
 module.exports = {
     signIn: async (req, res) => {
@@ -25,7 +24,9 @@ module.exports = {
                         throw err;
                     }
                     if (data) {
-                        const token = jwt.sign(user, process.env.JWT_KEY);
+                        // Why is dataValues needed here?
+                        // Also process.env.JWT_KEY not working here
+                        const token = jwt.sign(user.dataValues);
                         return res.status(200).json({token, user});
                     } else {
                         return res.status(401).json({ message: "Password does not match." });

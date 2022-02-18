@@ -26,7 +26,7 @@ module.exports = {
                     if (data) {
                         // Why is dataValues needed here?
                         // Also process.env.JWT_KEY not working here
-                        const token = jwt.sign(user.dataValues);
+                        const token = jwt.sign(user.dataValues, "access_token");
                         return res.status(200).json({token, user});
                     } else {
                         return res.status(401).json({ message: "Password does not match." });

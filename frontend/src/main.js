@@ -8,6 +8,9 @@ import './index.css'
 
 import Login from './components/Login';
 import Main from './components/Main';
+import UsersTable from './components/UsersTable';
+import ProjectsTable from './components/ProjectsTable.vue';
+import TasksTable from './components/TasksTable.vue';
 
 Vue.use(VueRouter);
 
@@ -19,7 +22,20 @@ const routes = [
   {
     path: '/home',
     component: Main,
+  },
+  {
+    path: '/users-table',
+    component: UsersTable
+  },
+  {
+    path: '/projects-table',
+    component: ProjectsTable
+  },
+  {
+    path: '/tasks-table',
+    component: TasksTable
   }
+
 ]
 
 const router = new VueRouter({

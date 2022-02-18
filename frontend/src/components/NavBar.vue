@@ -29,9 +29,10 @@
                 <div class="bg-black">
                     <div class="px-4 flex justify-between">
                     <div>
-                        <v-btn class="mx-1" large color="#F8FAFC" text>Users</v-btn>
-                        <v-btn class="mx-1" large color="#F8FAFC" text>Projects</v-btn>
-                        <v-btn class="mx-1" large color="#F8FAFC" text>Tasks</v-btn>
+                        <router-link to="/home"><v-btn class="mx-1" large color="#F8FAFC" text>Home</v-btn></router-link>
+                        <router-link to="/users-table"><v-btn class="mx-1" large color="#F8FAFC" text>Users</v-btn></router-link>
+                        <router-link to="/projects-table"><v-btn class="mx-1" large color="#F8FAFC" text>Projects</v-btn></router-link>
+                        <router-link to="/tasks-table"><v-btn class="mx-1" large color="#F8FAFC" text>Tasks</v-btn></router-link>
                     </div>
                     </div>
                 </div>

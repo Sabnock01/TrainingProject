@@ -4,6 +4,77 @@
       <v-row>
         <v-col class="d-flex justify-end">
           <v-dialog
+            v-model="updateDialog"
+            width="500"
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                class="primary mx-1"
+                v-bind="attrs"
+                v-on="on"
+              >Update User</v-btn>
+            </template>
+            <v-card>
+              <v-card-title class="text-h5 grey lighten-2">
+                Update User
+              </v-card-title>
+              <v-card-text>
+                <v-container>
+                  <v-row>
+                    <v-col cols="12">
+                      <v-autocomplete
+                        v-model="idToUpdate"
+                        :items="users"
+                        item-text="name"
+                        item-value="id"
+                        label="User"
+                      ></v-autocomplete>
+                    </v-col>
+                    <v-col cols="12">
+                      <v-text-field
+                        v-model="user.name"
+                        label="Name"
+                        required
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12">
+                      <v-text-field
+                        v-model="user.email"
+                        label="Email*"
+                        required
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12">
+                      <v-text-field
+                        v-model="user.password"
+                        label="Password*"
+                        type="password"
+                        required
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                  color="blue darken-1"
+                  text
+                  @click="updateDialog = false"
+                >
+                  Close
+                </v-btn>
+                <v-btn
+                  color="blue darken-1"
+                  text
+                  @click="updateUser"
+                >
+                  Save
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+          <v-dialog
             v-model="deleteDialog"
             width="500"
           >
@@ -72,21 +143,21 @@
                   <v-row>
                     <v-col cols="12">
                       <v-text-field
-                        v-model="createdUser.name"
+                        v-model="user.name"
                         label="Name"
                         required
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12">
                       <v-text-field
-                        v-model="createdUser.email"
+                        v-model="user.email"
                         label="Email*"
                         required
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12">
                       <v-text-field
-                        v-model="createdUser.password"
+                        v-model="user.password"
                         label="Password*"
                         type="password"
                         required
@@ -138,14 +209,17 @@ import axios from 'axios';
           { text: "Name", value: "name"},
           { text: "Email", value: "email"}
         ],
-        createdUser: {
+        user: {
           name: '',
           email: '',
           password: ''
         },
+        // Doubt both of these are needed but using them anyway
+        idToUpdate: null,
         idToDelete: null,
         dialog: false,
-        deleteDialog: false
+        deleteDialog: false,
+        updateDialog: false
       }
     },
     async created() {
@@ -159,7 +233,7 @@ import axios from 'axios';
         this.users = users;
       },
       async createUser() {
-        await axios.post("http://localhost:8000/users", this.createdUser);
+        await axios.post("http://localhost:8000/users", this.user);
 
         this.dialog = false;
       },
@@ -167,6 +241,11 @@ import axios from 'axios';
         await axios.delete(`http://localhost:8000/users/${this.idToDelete}`);
 
         this.deleteDialog = false;
+      },
+      async updateUser() {
+        await axios.put(`http://localhost:8000/users/${this.idToUpdate}`, this.user);
+
+        this.updateDialog = false;
       }
     }
   }

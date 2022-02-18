@@ -9,6 +9,7 @@
           >
             <template v-slot:activator="{ on, attrs }">
               <v-btn
+                class="primary"
                 v-bind="attrs"
                 v-on="on"
               >Create User</v-btn>

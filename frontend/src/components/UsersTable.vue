@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container>
+    <v-container fluid>
       <v-row>
         <v-col class="d-flex justify-end">
           <v-dialog
@@ -68,11 +68,12 @@
         </v-col>
       </v-row>
     </v-container>
-    <v-data-table
-      :headers="headers"
-      :items="users"
-      class="elevation-4"
-    ></v-data-table>
+      <v-data-table
+        :headers="headers"
+        :items="users"
+        class="mx-3 elevation-4"
+        dark
+      ></v-data-table>
   </div>
 </template>
 

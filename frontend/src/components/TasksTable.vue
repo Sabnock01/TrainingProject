@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container>
+    <v-container fluid>
       <v-row>
         <v-col class="d-flex justify-end">
           <v-dialog
@@ -83,7 +83,6 @@
                   Save
                 </v-btn>
               </v-card-actions>
-
             </v-card>
           </v-dialog>
         </v-col>
@@ -92,7 +91,8 @@
     <v-data-table
       :headers="headers"
       :items="tasks"
-      class="elevation-4"
+      class="mx-3 elevation-4"
+      dark
     ></v-data-table>
   </div>
 </template>

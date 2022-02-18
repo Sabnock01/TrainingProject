@@ -9,14 +9,14 @@
           >
             <template v-slot:activator="{ on, attrs}">
               <v-btn
-                class="primary"
+                class="primary mx-1"
                 v-bind="attrs"
                 v-on="on"
               >Delete User</v-btn>
             </template>
             <v-card>
               <v-card-title class="text-h5 grey lighten-2">
-                Delete user
+                Delete User
               </v-card-title>
               <v-card-text>
                 <v-container>
@@ -164,7 +164,7 @@ import axios from 'axios';
         this.dialog = false;
       },
       async deleteUser() {
-        await axios.delete(`http://localhost:8000/users/${this.idToDelete}`)
+        await axios.delete(`http://localhost:8000/users/${this.idToDelete}`);
 
         this.deleteDialog = false;
       }

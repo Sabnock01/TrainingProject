@@ -4,6 +4,55 @@
       <v-row>
         <v-col class="d-flex justify-end">
           <v-dialog
+            v-model="deleteDialog"
+            width="500"
+          >
+            <template v-slot:activator="{ on, attrs}">
+              <v-btn
+                class="primary mx-1"
+                v-bind="attrs"
+                v-on="on"
+              >Delete Project</v-btn>
+            </template>
+            <v-card>
+              <v-card-title class="text-h5 grey lighten-2">
+                Delete Project
+              </v-card-title>
+              <v-card-text>
+                <v-container>
+                  <v-row>
+                    <v-col cols="12">
+                      <v-autocomplete
+                        v-model="idToDelete"
+                        :items="projects"
+                        item-text="name"
+                        item-value="id"
+                        label="Project"
+                      ></v-autocomplete>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                  color="blue darken-1"
+                  text
+                  @click="deleteDialog = false"
+                >
+                  Close
+                </v-btn>
+                <v-btn
+                  color="blue darken-1"
+                  text
+                  @click="deleteProject"
+                >
+                  Save
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+          <v-dialog
             v-model="dialog"
             width="500"
           >
@@ -88,7 +137,9 @@ import axios from 'axios';
           name: '',
           leadId: null
         },
-        dialog: false
+        idToDelete: null,
+        dialog: false,
+        deleteDialog: false,
       }
     },
     async created() {
@@ -106,9 +157,14 @@ import axios from 'axios';
         this.users = users;
       },
       async createProject() {
-        await axios.post("http://localhost:8000/projects", this.createdProject)
+        await axios.post("http://localhost:8000/projects", this.createdProject);
 
         this.dialog = false;
+      },
+      async deleteProject() {
+        await axios.delete(`http://localhost:8000/projects/${this.idToDelete}`);
+
+        this.deleteDialog = false;
       }
     }
   }
